@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # coding: utf-8
 
 import PyRSS2Gen
@@ -15,8 +16,9 @@ def filter_feed(feed, keywords, exclusive=False):
     filtered_feed = copy.copy(feed)
     filtered_feed.entries = entries
     return filtered_feed
-
+print('loading original feed')
 feed = feedparser.parse(url_feed_929)
+print('done')
 
 def enclosure(entry):
     return next(
@@ -83,6 +85,7 @@ def filter_by_keyword(feed, keywords, filename, title=None, exclusive=False):
     rss = feed_to_rss(filtered_feed, '929 - ' + title)
     rss.write_xml(open('feeds/929-' + filename + '.rss', 'wb'))
 
+print('generate feeds')
 filter_by_keyword(feed, u'929 פרקים למחשבה', 'daily-chapter', 'הפרק היומי', exclusive=True)
 filter_by_keyword(feed, u'הרב בני לאו', 'harav-benny-lau')
 filter_by_keyword(feed, u'הרב דוד מנחם', 'harav-david-menachem')
@@ -91,3 +94,4 @@ filter_by_keyword(feed, u'תקציר', 'taktzir')
 filter_by_keyword(feed, u'התכנית 929 פרקים למחשבה', 'full-929-lemachsava', u'פרקים למחשבה - תכניות מלאות')
 filter_by_keyword(feed, u'בתכנית 929 פרקים למחשבה', 'short-929-lemachsava', u'פרקים למחשבה - קטעים')
 filter_by_keyword(feed, [u'929 פרקים למחשבה', u'הרב בני לאו', u'הרב דוד מנחם', u'עומר פרנקל', u'תקציר'], 'other', u'עוד על הפרק היומי')
+print('done')
